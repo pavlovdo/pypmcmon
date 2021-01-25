@@ -45,7 +45,7 @@ You have to view status of your cluster. If not, check pcs installation and perm
 
 B) Create cron job to run pcs status:
 ```
-echo "*/1 * * * * /sbin/pcs status xml > /usr/local/orbit/pypmcmon/data/pmc_status.xml" >> /tmp/crontab && \
+echo "*/1 * * * * /sbin/pcs status xml > /etc/zabbix/externalscripts/pypmcmon/data/pmc_status.xml" >> /tmp/crontab && \
 crontab /tmp/crontab && rm /tmp/crontab
 ```
 
@@ -91,7 +91,7 @@ pip3 install -r requirements.txt
 
 C) Create cron jobs for zabbix trappers:
 ```
-echo "*/1 * * * * /usr/local/orbit/pypmcmon/pypmcmon.py" > /tmp/crontab && \
+echo "*/1 * * * * /etc/zabbix/externalscripts/pypmcmon/pypmcmon.py" > /tmp/crontab && \
 crontab /tmp/crontab && rm /tmp/crontab
 ```
 
@@ -99,7 +99,7 @@ If you want to run scripts from docker container:
 
 A) Run build.sh:
 ```
-cd /etc/zabbix/externalscripts/pystormon
+cd /etc/zabbix/externalscripts/pypymcmon
 ./build.sh
 ```
 
@@ -111,7 +111,7 @@ B) Run dockerrun.sh;
 
 Notes
 ======
-1) For send exception alarms via slack hook to your slack channel, set parameter slack_hook in conf.d/pystormon.conf.
+1) For send exception alarms via slack hook to your slack channel, set parameter slack_hook in conf.d/pypypmcmon.conf.
 More details in https://api.slack.com/messaging/webhooks
 
 
