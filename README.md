@@ -19,11 +19,11 @@ Requirements
 
 Installation
 ============
-1) Clone pyipmimon repo to directory /etc/zabbix/externalscripts to each node of cluster (where you want to get status via pcs):
+1) Clone pypmcmon repo to directory /etc/zabbix/externalscripts to each node of cluster (where you want to get status via pcs):
 ```
 sudo mkdir -p /etc/zabbix/externalscripts
 cd /etc/zabbix/externalscripts
-sudo git clone https://github.com/pavlovdo/pyipmimon
+sudo git clone https://github.com/pavlovdo/pypmcmon
 ```
 
 2) A) Check execute permissions for scripts:
