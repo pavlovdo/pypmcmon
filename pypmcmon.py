@@ -7,7 +7,7 @@
 #
 # Discover pacemaker cluster nodes, fence devices, clones and resources via pcs status and sends their status to Zabbix Server via Zabbix Sender API
 #
-# Use with zabbix template Template App Pacemaker Cluster
+# Use with zabbix template Pacemaker Cluster Pypmcmon
 #
 
 import json
