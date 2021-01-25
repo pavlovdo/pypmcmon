@@ -1,0 +1,660 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>4.4</version>
+    <date>2021-01-25T15:34:27Z</date>
+    <groups>
+        <group>
+            <name>Templates/Virtualization</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template Pacemaker Cluster</template>
+            <name>Template Pacemaker Cluster</name>
+            <groups>
+                <group>
+                    <name>Templates/Virtualization</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>Pacemaker Cluster Clone resources</name>
+                </application>
+                <application>
+                    <name>Pacemaker Cluster Fence Devices</name>
+                </application>
+                <application>
+                    <name>Pacemaker Cluster Nodes</name>
+                </application>
+                <application>
+                    <name>Pacemaker Cluster Resources</name>
+                </application>
+            </applications>
+            <discovery_rules>
+                <discovery_rule>
+                    <name>Clones discovery</name>
+                    <type>TRAP</type>
+                    <key>clones.discovery</key>
+                    <delay>0</delay>
+                    <lifetime>3d</lifetime>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>Failed state of {#OBJECT_TYPE} {#CLONE_NAME}</name>
+                            <type>TRAP</type>
+                            <key>failed[{#CLONE_NAME}]</key>
+                            <delay>0</delay>
+                            <applications>
+                                <application>
+                                    <name>Pacemaker Cluster Clone resources</name>
+                                </application>
+                            </applications>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{last()}=1</expression>
+                                    <name>{#OBJECT_TYPE} {#CLONE_NAME} is failed</name>
+                                    <priority>AVERAGE</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Failure ignored state of {#OBJECT_TYPE} {#CLONE_NAME}</name>
+                            <type>TRAP</type>
+                            <key>failure_ignored[{#CLONE_NAME}]</key>
+                            <delay>0</delay>
+                            <applications>
+                                <application>
+                                    <name>Pacemaker Cluster Clone resources</name>
+                                </application>
+                            </applications>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{last()}=1</expression>
+                                    <name>{#OBJECT_TYPE} {#CLONE_NAME} in failure ignored state</name>
+                                    <priority>AVERAGE</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Managed state of {#OBJECT_TYPE} {#CLONE_NAME}</name>
+                            <type>TRAP</type>
+                            <key>managed[{#CLONE_NAME}]</key>
+                            <delay>0</delay>
+                            <applications>
+                                <application>
+                                    <name>Pacemaker Cluster Clone resources</name>
+                                </application>
+                            </applications>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{last()}=0</expression>
+                                    <name>{#OBJECT_TYPE} {#CLONE_NAME} is not managed</name>
+                                    <priority>AVERAGE</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Multi state of {#OBJECT_TYPE} {#CLONE_NAME}</name>
+                            <type>TRAP</type>
+                            <key>multi_state[{#CLONE_NAME}]</key>
+                            <delay>0</delay>
+                            <applications>
+                                <application>
+                                    <name>Pacemaker Cluster Clone resources</name>
+                                </application>
+                            </applications>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{last()}=1</expression>
+                                    <name>{#OBJECT_TYPE} {#CLONE_NAME} in multi state</name>
+                                    <priority>AVERAGE</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Unique of {#OBJECT_TYPE} {#CLONE_NAME}</name>
+                            <type>TRAP</type>
+                            <key>unique[{#CLONE_NAME}]</key>
+                            <delay>0</delay>
+                            <applications>
+                                <application>
+                                    <name>Pacemaker Cluster Clone resources</name>
+                                </application>
+                            </applications>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{last()}=1</expression>
+                                    <name>{#OBJECT_TYPE} {#CLONE_NAME} is unique</name>
+                                    <priority>AVERAGE</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                    </item_prototypes>
+                </discovery_rule>
+                <discovery_rule>
+                    <name>Fence Devices discovery</name>
+                    <type>TRAP</type>
+                    <key>fence.devices.discovery</key>
+                    <delay>0</delay>
+                    <lifetime>3d</lifetime>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>Active state of {#OBJECT_TYPE} {#FD_NAME}</name>
+                            <type>TRAP</type>
+                            <key>active[{#FD_NAME}]</key>
+                            <delay>0</delay>
+                            <applications>
+                                <application>
+                                    <name>Pacemaker Cluster Fence Devices</name>
+                                </application>
+                            </applications>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{last()}=0</expression>
+                                    <name>{#OBJECT_TYPE} {#FD_NAME} is not active</name>
+                                    <priority>AVERAGE</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Blocked state of {#OBJECT_TYPE} {#FD_NAME}</name>
+                            <type>TRAP</type>
+                            <key>blocked[{#FD_NAME}]</key>
+                            <delay>0</delay>
+                            <applications>
+                                <application>
+                                    <name>Pacemaker Cluster Fence Devices</name>
+                                </application>
+                            </applications>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{last()}=1</expression>
+                                    <name>{#OBJECT_TYPE} {#FD_NAME} in blocked state</name>
+                                    <priority>AVERAGE</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Failed state of {#OBJECT_TYPE} {#FD_NAME}</name>
+                            <type>TRAP</type>
+                            <key>failed[{#FD_NAME}]</key>
+                            <delay>0</delay>
+                            <applications>
+                                <application>
+                                    <name>Pacemaker Cluster Fence Devices</name>
+                                </application>
+                            </applications>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{last()}=1</expression>
+                                    <name>{#OBJECT_TYPE} {#FD_NAME} is failed</name>
+                                    <priority>AVERAGE</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Failure ignored state of {#OBJECT_TYPE} {#FD_NAME}</name>
+                            <type>TRAP</type>
+                            <key>failure_ignored[{#FD_NAME}]</key>
+                            <delay>0</delay>
+                            <applications>
+                                <application>
+                                    <name>Pacemaker Cluster Fence Devices</name>
+                                </application>
+                            </applications>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{last()}=1</expression>
+                                    <name>{#OBJECT_TYPE} {#FD_NAME} in failure ignored state</name>
+                                    <priority>AVERAGE</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Managed state of {#OBJECT_TYPE} {#FD_NAME}</name>
+                            <type>TRAP</type>
+                            <key>managed[{#FD_NAME}]</key>
+                            <delay>0</delay>
+                            <applications>
+                                <application>
+                                    <name>Pacemaker Cluster Fence Devices</name>
+                                </application>
+                            </applications>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{last()}=0</expression>
+                                    <name>{#OBJECT_TYPE} {#FD_NAME} is not managed</name>
+                                    <priority>AVERAGE</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Count of nodes running {#OBJECT_TYPE} {#FD_NAME}</name>
+                            <type>TRAP</type>
+                            <key>nodes_running_on[{#FD_NAME}]</key>
+                            <delay>0</delay>
+                            <applications>
+                                <application>
+                                    <name>Pacemaker Cluster Fence Devices</name>
+                                </application>
+                            </applications>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{diff()}=1</expression>
+                                    <name>Count of nodes running {#OBJECT_TYPE} {#FD_NAME} is changed</name>
+                                    <priority>WARNING</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Orphaned state of {#OBJECT_TYPE} {#FD_NAME}</name>
+                            <type>TRAP</type>
+                            <key>orphaned[{#FD_NAME}]</key>
+                            <delay>0</delay>
+                            <applications>
+                                <application>
+                                    <name>Pacemaker Cluster Fence Devices</name>
+                                </application>
+                            </applications>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{last()}=1</expression>
+                                    <name>{#OBJECT_TYPE} {#FD_NAME} is orphaned</name>
+                                    <priority>AVERAGE</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Role of {#OBJECT_TYPE} {#FD_NAME}</name>
+                            <type>TRAP</type>
+                            <key>role[{#FD_NAME}]</key>
+                            <delay>0</delay>
+                            <trends>0</trends>
+                            <value_type>CHAR</value_type>
+                            <applications>
+                                <application>
+                                    <name>Pacemaker Cluster Fence Devices</name>
+                                </application>
+                            </applications>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{str(Started)}=0</expression>
+                                    <name>Role {#OBJECT_TYPE} {#FD_NAME} is not started</name>
+                                    <priority>AVERAGE</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                    </item_prototypes>
+                </discovery_rule>
+                <discovery_rule>
+                    <name>Nodes discovery</name>
+                    <type>TRAP</type>
+                    <key>nodes.discovery</key>
+                    <delay>0</delay>
+                    <lifetime>3d</lifetime>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>Expected up state of {#OBJECT_TYPE} {#NODE_NAME}</name>
+                            <type>TRAP</type>
+                            <key>expected_up[{#NODE_NAME}]</key>
+                            <delay>0</delay>
+                            <applications>
+                                <application>
+                                    <name>Pacemaker Cluster Nodes</name>
+                                </application>
+                            </applications>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{last()}=0</expression>
+                                    <name>{#OBJECT_TYPE} {#NODE_NAME} not in expected up state</name>
+                                    <priority>AVERAGE</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Is dc state of {#OBJECT_TYPE} {#NODE_NAME}</name>
+                            <type>TRAP</type>
+                            <key>is_dc[{#NODE_NAME}]</key>
+                            <delay>0</delay>
+                            <applications>
+                                <application>
+                                    <name>Pacemaker Cluster Nodes</name>
+                                </application>
+                            </applications>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{last()}=1 and  {diff()}=1</expression>
+                                    <name>{#OBJECT_TYPE} {#NODE_NAME} become designated controller (DC)</name>
+                                    <priority>AVERAGE</priority>
+                                </trigger_prototype>
+                                <trigger_prototype>
+                                    <expression>{last()}=0 and  {diff()}=1</expression>
+                                    <name>{#OBJECT_TYPE} {#NODE_NAME} is not designated controller (DC) more</name>
+                                    <priority>AVERAGE</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Maintenance state of {#OBJECT_TYPE} {#NODE_NAME}</name>
+                            <type>TRAP</type>
+                            <key>maintenance[{#NODE_NAME}]</key>
+                            <delay>0</delay>
+                            <applications>
+                                <application>
+                                    <name>Pacemaker Cluster Nodes</name>
+                                </application>
+                            </applications>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{last()}=1</expression>
+                                    <name>{#OBJECT_TYPE} {#NODE_NAME} on maintenance</name>
+                                    <priority>AVERAGE</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Online state of {#OBJECT_TYPE} {#NODE_NAME}</name>
+                            <type>TRAP</type>
+                            <key>online[{#NODE_NAME}]</key>
+                            <delay>0</delay>
+                            <applications>
+                                <application>
+                                    <name>Pacemaker Cluster Nodes</name>
+                                </application>
+                            </applications>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{last()}=0</expression>
+                                    <name>{#OBJECT_TYPE} {#NODE_NAME} is not online</name>
+                                    <priority>HIGH</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Pending state of {#OBJECT_TYPE} {#NODE_NAME}</name>
+                            <type>TRAP</type>
+                            <key>pending[{#NODE_NAME}]</key>
+                            <delay>0</delay>
+                            <applications>
+                                <application>
+                                    <name>Pacemaker Cluster Nodes</name>
+                                </application>
+                            </applications>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{last()}=1</expression>
+                                    <name>{#OBJECT_TYPE} {#NODE_NAME} in pending</name>
+                                    <priority>AVERAGE</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Count of resources on {#OBJECT_TYPE} {#NODE_NAME}</name>
+                            <type>TRAP</type>
+                            <key>resources_running[{#NODE_NAME}]</key>
+                            <delay>0</delay>
+                            <applications>
+                                <application>
+                                    <name>Pacemaker Cluster Nodes</name>
+                                </application>
+                            </applications>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{change()}=1</expression>
+                                    <name>Count of resources on {#OBJECT_TYPE} {#NODE_NAME} is changed</name>
+                                    <priority>WARNING</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Shutdown state of {#OBJECT_TYPE} {#NODE_NAME}</name>
+                            <type>TRAP</type>
+                            <key>shutdown[{#NODE_NAME}]</key>
+                            <delay>0</delay>
+                            <applications>
+                                <application>
+                                    <name>Pacemaker Cluster Nodes</name>
+                                </application>
+                            </applications>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{last()}=1</expression>
+                                    <name>{#OBJECT_TYPE} {#NODE_NAME} is shutdowned</name>
+                                    <priority>HIGH</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Standby state of {#OBJECT_TYPE} {#NODE_NAME}</name>
+                            <type>TRAP</type>
+                            <key>standby[{#NODE_NAME}]</key>
+                            <delay>0</delay>
+                            <applications>
+                                <application>
+                                    <name>Pacemaker Cluster Nodes</name>
+                                </application>
+                            </applications>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{last()}=1</expression>
+                                    <name>{#OBJECT_TYPE} {#NODE_NAME} in standby</name>
+                                    <priority>AVERAGE</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Standby on fail state of {#OBJECT_TYPE} {#NODE_NAME}</name>
+                            <type>TRAP</type>
+                            <key>standby_onfail[{#NODE_NAME}]</key>
+                            <delay>0</delay>
+                            <applications>
+                                <application>
+                                    <name>Pacemaker Cluster Nodes</name>
+                                </application>
+                            </applications>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{last()}=1</expression>
+                                    <name>{#OBJECT_TYPE} {#NODE_NAME} in standby on fail</name>
+                                    <priority>AVERAGE</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Type of {#OBJECT_TYPE} {#NODE_NAME}</name>
+                            <type>TRAP</type>
+                            <key>type[{#NODE_NAME}]</key>
+                            <delay>0</delay>
+                            <trends>0</trends>
+                            <value_type>CHAR</value_type>
+                            <applications>
+                                <application>
+                                    <name>Pacemaker Cluster Nodes</name>
+                                </application>
+                            </applications>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{str(member)}=0</expression>
+                                    <name>{#OBJECT_TYPE} {#NODE_NAME} is not member of cluster</name>
+                                    <priority>AVERAGE</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Unclean state of {#OBJECT_TYPE} {#NODE_NAME}</name>
+                            <type>TRAP</type>
+                            <key>unclean[{#NODE_NAME}]</key>
+                            <delay>0</delay>
+                            <applications>
+                                <application>
+                                    <name>Pacemaker Cluster Nodes</name>
+                                </application>
+                            </applications>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{last()}=1</expression>
+                                    <name>{#OBJECT_TYPE} {#NODE_NAME} is not clean</name>
+                                    <priority>AVERAGE</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                    </item_prototypes>
+                </discovery_rule>
+                <discovery_rule>
+                    <name>Resources discovery</name>
+                    <type>TRAP</type>
+                    <key>resources.discovery</key>
+                    <delay>0</delay>
+                    <lifetime>3d</lifetime>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>Active state of {#OBJECT_TYPE}  {#RESOURCE_NAME}</name>
+                            <type>TRAP</type>
+                            <key>active[{#RESOURCE_NAME}]</key>
+                            <delay>0</delay>
+                            <applications>
+                                <application>
+                                    <name>Pacemaker Cluster Resources</name>
+                                </application>
+                            </applications>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{last()}=0</expression>
+                                    <name>{#OBJECT_TYPE} {#RESOURCE_NAME} is not active</name>
+                                    <priority>AVERAGE</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Blocked state of {#OBJECT_TYPE} {#RESOURCE_NAME}</name>
+                            <type>TRAP</type>
+                            <key>blocked[{#RESOURCE_NAME}]</key>
+                            <delay>0</delay>
+                            <applications>
+                                <application>
+                                    <name>Pacemaker Cluster Resources</name>
+                                </application>
+                            </applications>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{last()}=1</expression>
+                                    <name>{#OBJECT_TYPE} {#RESOURCE_NAME} is blocked</name>
+                                    <priority>AVERAGE</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Failed state of {#OBJECT_TYPE} {#RESOURCE_NAME}</name>
+                            <type>TRAP</type>
+                            <key>failed[{#RESOURCE_NAME}]</key>
+                            <delay>0</delay>
+                            <applications>
+                                <application>
+                                    <name>Pacemaker Cluster Resources</name>
+                                </application>
+                            </applications>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{last()}=1</expression>
+                                    <name>{#OBJECT_TYPE} {#RESOURCE_NAME} is failed</name>
+                                    <priority>AVERAGE</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Failure ignored state of {#OBJECT_TYPE} {#RESOURCE_NAME}</name>
+                            <type>TRAP</type>
+                            <key>failure_ignored[{#RESOURCE_NAME}]</key>
+                            <delay>0</delay>
+                            <applications>
+                                <application>
+                                    <name>Pacemaker Cluster Resources</name>
+                                </application>
+                            </applications>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{last()}=1</expression>
+                                    <name>{#OBJECT_TYPE} {#RESOURCE_NAME} in failure ignored state</name>
+                                    <priority>AVERAGE</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Managed state of {#OBJECT_TYPE} {#RESOURCE_NAME}</name>
+                            <type>TRAP</type>
+                            <key>managed[{#RESOURCE_NAME}]</key>
+                            <delay>0</delay>
+                            <applications>
+                                <application>
+                                    <name>Pacemaker Cluster Resources</name>
+                                </application>
+                            </applications>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{last()}=0</expression>
+                                    <name>{#OBJECT_TYPE} {#RESOURCE_NAME} is not managed</name>
+                                    <priority>AVERAGE</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Count of nodes running {#OBJECT_TYPE} {#RESOURCE_NAME}</name>
+                            <type>TRAP</type>
+                            <key>nodes_running_on[{#RESOURCE_NAME}]</key>
+                            <delay>0</delay>
+                            <applications>
+                                <application>
+                                    <name>Pacemaker Cluster Resources</name>
+                                </application>
+                            </applications>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{diff()}=1</expression>
+                                    <name>Count of nodes running {#OBJECT_TYPE} {#RESOURCE_NAME} is changed</name>
+                                    <priority>WARNING</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Orphaned state of {#OBJECT_TYPE} {#RESOURCE_NAME}</name>
+                            <type>TRAP</type>
+                            <key>orphaned[{#RESOURCE_NAME}]</key>
+                            <delay>0</delay>
+                            <applications>
+                                <application>
+                                    <name>Pacemaker Cluster Resources</name>
+                                </application>
+                            </applications>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{last()}=1</expression>
+                                    <name>{#OBJECT_TYPE} {#RESOURCE_NAME} is orphaned</name>
+                                    <priority>AVERAGE</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Role of {#OBJECT_TYPE} {#RESOURCE_NAME}</name>
+                            <type>TRAP</type>
+                            <key>role[{#RESOURCE_NAME}]</key>
+                            <delay>0</delay>
+                            <trends>0</trends>
+                            <value_type>CHAR</value_type>
+                            <applications>
+                                <application>
+                                    <name>Pacemaker Cluster Resources</name>
+                                </application>
+                            </applications>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{str(Started)}=0</expression>
+                                    <name>Role of {#OBJECT_TYPE} {#RESOURCE_NAME} is not started</name>
+                                    <priority>AVERAGE</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                    </item_prototypes>
+                </discovery_rule>
+            </discovery_rules>
+        </template>
+    </templates>
+</zabbix_export>

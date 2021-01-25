@@ -1,0 +1,661 @@
+{
+    "zabbix_export": {
+        "version": "5.2",
+        "date": "2021-01-25T15:29:02Z",
+        "groups": [
+            {
+                "name": "Templates/Modules"
+            }
+        ],
+        "templates": [
+            {
+                "template": "Pacemaker Cluster Pypmcmon",
+                "name": "Pacemaker Cluster Pypmcmon",
+                "groups": [
+                    {
+                        "name": "Templates/Modules"
+                    }
+                ],
+                "applications": [
+                    {
+                        "name": "Pacemaker Cluster Clone resources"
+                    },
+                    {
+                        "name": "Pacemaker Cluster Fence Devices"
+                    },
+                    {
+                        "name": "Pacemaker Cluster Nodes"
+                    },
+                    {
+                        "name": "Pacemaker Cluster Resources"
+                    }
+                ],
+                "discovery_rules": [
+                    {
+                        "name": "Clones discovery",
+                        "type": "TRAP",
+                        "key": "clones.discovery",
+                        "delay": "0",
+                        "lifetime": "3d",
+                        "item_prototypes": [
+                            {
+                                "name": "Failed state of {#OBJECT_TYPE} {#CLONE_NAME}",
+                                "type": "TRAP",
+                                "key": "failed[{#CLONE_NAME}]",
+                                "delay": "0",
+                                "applications": [
+                                    {
+                                        "name": "Pacemaker Cluster Clone resources"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "expression": "{last()}=1",
+                                        "name": "{#OBJECT_TYPE} {#CLONE_NAME} is failed",
+                                        "priority": "AVERAGE"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Failure ignored state of {#OBJECT_TYPE} {#CLONE_NAME}",
+                                "type": "TRAP",
+                                "key": "failure_ignored[{#CLONE_NAME}]",
+                                "delay": "0",
+                                "applications": [
+                                    {
+                                        "name": "Pacemaker Cluster Clone resources"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "expression": "{last()}=1",
+                                        "name": "{#OBJECT_TYPE} {#CLONE_NAME} in failure ignored state",
+                                        "priority": "AVERAGE"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Managed state of {#OBJECT_TYPE} {#CLONE_NAME}",
+                                "type": "TRAP",
+                                "key": "managed[{#CLONE_NAME}]",
+                                "delay": "0",
+                                "applications": [
+                                    {
+                                        "name": "Pacemaker Cluster Clone resources"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "expression": "{last()}=0",
+                                        "name": "{#OBJECT_TYPE} {#CLONE_NAME} is not managed",
+                                        "priority": "AVERAGE"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Multi state of {#OBJECT_TYPE} {#CLONE_NAME}",
+                                "type": "TRAP",
+                                "key": "multi_state[{#CLONE_NAME}]",
+                                "delay": "0",
+                                "applications": [
+                                    {
+                                        "name": "Pacemaker Cluster Clone resources"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "expression": "{last()}=1",
+                                        "name": "{#OBJECT_TYPE} {#CLONE_NAME} in multi state",
+                                        "priority": "AVERAGE"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Unique of {#OBJECT_TYPE} {#CLONE_NAME}",
+                                "type": "TRAP",
+                                "key": "unique[{#CLONE_NAME}]",
+                                "delay": "0",
+                                "applications": [
+                                    {
+                                        "name": "Pacemaker Cluster Clone resources"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "expression": "{last()}=1",
+                                        "name": "{#OBJECT_TYPE} {#CLONE_NAME} is unique",
+                                        "priority": "AVERAGE"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Fence Devices discovery",
+                        "type": "TRAP",
+                        "key": "fence.devices.discovery",
+                        "delay": "0",
+                        "lifetime": "3d",
+                        "item_prototypes": [
+                            {
+                                "name": "Active state of {#OBJECT_TYPE} {#FD_NAME}",
+                                "type": "TRAP",
+                                "key": "active[{#FD_NAME}]",
+                                "delay": "0",
+                                "applications": [
+                                    {
+                                        "name": "Pacemaker Cluster Fence Devices"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "expression": "{last()}=0",
+                                        "name": "{#OBJECT_TYPE} {#FD_NAME} is not active",
+                                        "priority": "AVERAGE"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Blocked state of {#OBJECT_TYPE} {#FD_NAME}",
+                                "type": "TRAP",
+                                "key": "blocked[{#FD_NAME}]",
+                                "delay": "0",
+                                "applications": [
+                                    {
+                                        "name": "Pacemaker Cluster Fence Devices"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "expression": "{last()}=1",
+                                        "name": "{#OBJECT_TYPE} {#FD_NAME} in blocked state",
+                                        "priority": "AVERAGE"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Failed state of {#OBJECT_TYPE} {#FD_NAME}",
+                                "type": "TRAP",
+                                "key": "failed[{#FD_NAME}]",
+                                "delay": "0",
+                                "applications": [
+                                    {
+                                        "name": "Pacemaker Cluster Fence Devices"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "expression": "{last()}=1",
+                                        "name": "{#OBJECT_TYPE} {#FD_NAME} is failed",
+                                        "priority": "AVERAGE"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Failure ignored state of {#OBJECT_TYPE} {#FD_NAME}",
+                                "type": "TRAP",
+                                "key": "failure_ignored[{#FD_NAME}]",
+                                "delay": "0",
+                                "applications": [
+                                    {
+                                        "name": "Pacemaker Cluster Fence Devices"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "expression": "{last()}=1",
+                                        "name": "{#OBJECT_TYPE} {#FD_NAME} in failure ignored state",
+                                        "priority": "AVERAGE"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Managed state of {#OBJECT_TYPE} {#FD_NAME}",
+                                "type": "TRAP",
+                                "key": "managed[{#FD_NAME}]",
+                                "delay": "0",
+                                "applications": [
+                                    {
+                                        "name": "Pacemaker Cluster Fence Devices"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "expression": "{last()}=0",
+                                        "name": "{#OBJECT_TYPE} {#FD_NAME} is not managed",
+                                        "priority": "AVERAGE"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Count of nodes running {#OBJECT_TYPE} {#FD_NAME}",
+                                "type": "TRAP",
+                                "key": "nodes_running_on[{#FD_NAME}]",
+                                "delay": "0",
+                                "applications": [
+                                    {
+                                        "name": "Pacemaker Cluster Fence Devices"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "expression": "{diff()}=1",
+                                        "name": "Count of nodes running {#OBJECT_TYPE} {#FD_NAME} is changed",
+                                        "priority": "WARNING"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Orphaned state of {#OBJECT_TYPE} {#FD_NAME}",
+                                "type": "TRAP",
+                                "key": "orphaned[{#FD_NAME}]",
+                                "delay": "0",
+                                "applications": [
+                                    {
+                                        "name": "Pacemaker Cluster Fence Devices"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "expression": "{last()}=1",
+                                        "name": "{#OBJECT_TYPE} {#FD_NAME} is orphaned",
+                                        "priority": "AVERAGE"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Role of {#OBJECT_TYPE} {#FD_NAME}",
+                                "type": "TRAP",
+                                "key": "role[{#FD_NAME}]",
+                                "delay": "0",
+                                "trends": "0",
+                                "value_type": "CHAR",
+                                "applications": [
+                                    {
+                                        "name": "Pacemaker Cluster Fence Devices"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "expression": "{str(Started)}=0",
+                                        "name": "Role {#OBJECT_TYPE} {#FD_NAME} is not started",
+                                        "priority": "AVERAGE"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Nodes discovery",
+                        "type": "TRAP",
+                        "key": "nodes.discovery",
+                        "delay": "0",
+                        "lifetime": "3d",
+                        "item_prototypes": [
+                            {
+                                "name": "Expected up state of {#OBJECT_TYPE} {#NODE_NAME}",
+                                "type": "TRAP",
+                                "key": "expected_up[{#NODE_NAME}]",
+                                "delay": "0",
+                                "applications": [
+                                    {
+                                        "name": "Pacemaker Cluster Nodes"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "expression": "{last()}=0",
+                                        "name": "{#OBJECT_TYPE} {#NODE_NAME} not in expected up state",
+                                        "priority": "AVERAGE"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Is dc state of {#OBJECT_TYPE} {#NODE_NAME}",
+                                "type": "TRAP",
+                                "key": "is_dc[{#NODE_NAME}]",
+                                "delay": "0",
+                                "applications": [
+                                    {
+                                        "name": "Pacemaker Cluster Nodes"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "expression": "{last()}=1 and  {diff()}=1",
+                                        "name": "{#OBJECT_TYPE} {#NODE_NAME} become designated controller (DC)",
+                                        "priority": "AVERAGE"
+                                    },
+                                    {
+                                        "expression": "{last()}=0 and  {diff()}=1",
+                                        "name": "{#OBJECT_TYPE} {#NODE_NAME} is not designated controller (DC) more",
+                                        "priority": "AVERAGE"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Maintenance state of {#OBJECT_TYPE} {#NODE_NAME}",
+                                "type": "TRAP",
+                                "key": "maintenance[{#NODE_NAME}]",
+                                "delay": "0",
+                                "applications": [
+                                    {
+                                        "name": "Pacemaker Cluster Nodes"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "expression": "{last()}=1",
+                                        "name": "{#OBJECT_TYPE} {#NODE_NAME} on maintenance",
+                                        "priority": "AVERAGE"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Online state of {#OBJECT_TYPE} {#NODE_NAME}",
+                                "type": "TRAP",
+                                "key": "online[{#NODE_NAME}]",
+                                "delay": "0",
+                                "applications": [
+                                    {
+                                        "name": "Pacemaker Cluster Nodes"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "expression": "{last()}=0",
+                                        "name": "{#OBJECT_TYPE} {#NODE_NAME} is not online",
+                                        "priority": "HIGH"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Pending state of {#OBJECT_TYPE} {#NODE_NAME}",
+                                "type": "TRAP",
+                                "key": "pending[{#NODE_NAME}]",
+                                "delay": "0",
+                                "applications": [
+                                    {
+                                        "name": "Pacemaker Cluster Nodes"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "expression": "{last()}=1",
+                                        "name": "{#OBJECT_TYPE} {#NODE_NAME} in pending",
+                                        "priority": "AVERAGE"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Count of resources on {#OBJECT_TYPE} {#NODE_NAME}",
+                                "type": "TRAP",
+                                "key": "resources_running[{#NODE_NAME}]",
+                                "delay": "0",
+                                "applications": [
+                                    {
+                                        "name": "Pacemaker Cluster Nodes"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "expression": "{change()}=1",
+                                        "name": "Count of resources on {#OBJECT_TYPE} {#NODE_NAME} is changed",
+                                        "priority": "WARNING"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Shutdown state of {#OBJECT_TYPE} {#NODE_NAME}",
+                                "type": "TRAP",
+                                "key": "shutdown[{#NODE_NAME}]",
+                                "delay": "0",
+                                "applications": [
+                                    {
+                                        "name": "Pacemaker Cluster Nodes"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "expression": "{last()}=1",
+                                        "name": "{#OBJECT_TYPE} {#NODE_NAME} is shutdowned",
+                                        "priority": "HIGH"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Standby state of {#OBJECT_TYPE} {#NODE_NAME}",
+                                "type": "TRAP",
+                                "key": "standby[{#NODE_NAME}]",
+                                "delay": "0",
+                                "applications": [
+                                    {
+                                        "name": "Pacemaker Cluster Nodes"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "expression": "{last()}=1",
+                                        "name": "{#OBJECT_TYPE} {#NODE_NAME} in standby",
+                                        "priority": "AVERAGE"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Standby on fail state of {#OBJECT_TYPE} {#NODE_NAME}",
+                                "type": "TRAP",
+                                "key": "standby_onfail[{#NODE_NAME}]",
+                                "delay": "0",
+                                "applications": [
+                                    {
+                                        "name": "Pacemaker Cluster Nodes"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "expression": "{last()}=1",
+                                        "name": "{#OBJECT_TYPE} {#NODE_NAME} in standby on fail",
+                                        "priority": "AVERAGE"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Type of {#OBJECT_TYPE} {#NODE_NAME}",
+                                "type": "TRAP",
+                                "key": "type[{#NODE_NAME}]",
+                                "delay": "0",
+                                "trends": "0",
+                                "value_type": "CHAR",
+                                "applications": [
+                                    {
+                                        "name": "Pacemaker Cluster Nodes"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "expression": "{str(member)}=0",
+                                        "name": "{#OBJECT_TYPE} {#NODE_NAME} is not member of cluster",
+                                        "priority": "AVERAGE"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Unclean state of {#OBJECT_TYPE} {#NODE_NAME}",
+                                "type": "TRAP",
+                                "key": "unclean[{#NODE_NAME}]",
+                                "delay": "0",
+                                "applications": [
+                                    {
+                                        "name": "Pacemaker Cluster Nodes"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "expression": "{last()}=1",
+                                        "name": "{#OBJECT_TYPE} {#NODE_NAME} is not clean",
+                                        "priority": "AVERAGE"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Resources discovery",
+                        "type": "TRAP",
+                        "key": "resources.discovery",
+                        "delay": "0",
+                        "lifetime": "3d",
+                        "item_prototypes": [
+                            {
+                                "name": "Active state of {#OBJECT_TYPE}  {#RESOURCE_NAME}",
+                                "type": "TRAP",
+                                "key": "active[{#RESOURCE_NAME}]",
+                                "delay": "0",
+                                "applications": [
+                                    {
+                                        "name": "Pacemaker Cluster Resources"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "expression": "{last()}=0",
+                                        "name": "{#OBJECT_TYPE} {#RESOURCE_NAME} is not active",
+                                        "priority": "AVERAGE"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Blocked state of {#OBJECT_TYPE} {#RESOURCE_NAME}",
+                                "type": "TRAP",
+                                "key": "blocked[{#RESOURCE_NAME}]",
+                                "delay": "0",
+                                "applications": [
+                                    {
+                                        "name": "Pacemaker Cluster Resources"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "expression": "{last()}=1",
+                                        "name": "{#OBJECT_TYPE} {#RESOURCE_NAME} is blocked",
+                                        "priority": "AVERAGE"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Failed state of {#OBJECT_TYPE} {#RESOURCE_NAME}",
+                                "type": "TRAP",
+                                "key": "failed[{#RESOURCE_NAME}]",
+                                "delay": "0",
+                                "applications": [
+                                    {
+                                        "name": "Pacemaker Cluster Resources"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "expression": "{last()}=1",
+                                        "name": "{#OBJECT_TYPE} {#RESOURCE_NAME} is failed",
+                                        "priority": "AVERAGE"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Failure ignored state of {#OBJECT_TYPE} {#RESOURCE_NAME}",
+                                "type": "TRAP",
+                                "key": "failure_ignored[{#RESOURCE_NAME}]",
+                                "delay": "0",
+                                "applications": [
+                                    {
+                                        "name": "Pacemaker Cluster Resources"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "expression": "{last()}=1",
+                                        "name": "{#OBJECT_TYPE} {#RESOURCE_NAME} in failure ignored state",
+                                        "priority": "AVERAGE"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Managed state of {#OBJECT_TYPE} {#RESOURCE_NAME}",
+                                "type": "TRAP",
+                                "key": "managed[{#RESOURCE_NAME}]",
+                                "delay": "0",
+                                "applications": [
+                                    {
+                                        "name": "Pacemaker Cluster Resources"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "expression": "{last()}=0",
+                                        "name": "{#OBJECT_TYPE} {#RESOURCE_NAME} is not managed",
+                                        "priority": "AVERAGE"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Count of nodes running {#OBJECT_TYPE} {#RESOURCE_NAME}",
+                                "type": "TRAP",
+                                "key": "nodes_running_on[{#RESOURCE_NAME}]",
+                                "delay": "0",
+                                "applications": [
+                                    {
+                                        "name": "Pacemaker Cluster Resources"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "expression": "{diff()}=1",
+                                        "name": "Count of nodes running {#OBJECT_TYPE} {#RESOURCE_NAME} is changed",
+                                        "priority": "WARNING"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Orphaned state of {#OBJECT_TYPE} {#RESOURCE_NAME}",
+                                "type": "TRAP",
+                                "key": "orphaned[{#RESOURCE_NAME}]",
+                                "delay": "0",
+                                "applications": [
+                                    {
+                                        "name": "Pacemaker Cluster Resources"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "expression": "{last()}=1",
+                                        "name": "{#OBJECT_TYPE} {#RESOURCE_NAME} is orphaned",
+                                        "priority": "AVERAGE"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Role of {#OBJECT_TYPE} {#RESOURCE_NAME}",
+                                "type": "TRAP",
+                                "key": "role[{#RESOURCE_NAME}]",
+                                "delay": "0",
+                                "trends": "0",
+                                "value_type": "CHAR",
+                                "applications": [
+                                    {
+                                        "name": "Pacemaker Cluster Resources"
+                                    }
+                                ],
+                                "trigger_prototypes": [
+                                    {
+                                        "expression": "{str(Started)}=0",
+                                        "name": "Role of {#OBJECT_TYPE} {#RESOURCE_NAME} is not started",
+                                        "priority": "AVERAGE"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

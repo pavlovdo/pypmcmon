@@ -1,0 +1,140 @@
+{
+    "node": {
+	"xml_element": "nodes/node",
+	"xml_attr_name": "name",
+        "xml_attributes":
+            [
+             "id",
+	     "online",
+	     "standby",
+	     "standby_onfail",
+	     "maintenance",
+	     "pending",
+	     "unclean",
+	     "shutdown",
+	     "expected_up",
+	     "is_dc",
+	     "resources_running",
+	     "type"
+            ],
+        "zabbix_discovery_name":"nodes.discovery",
+        "zabbix_discovery_macro": "{#NODE_NAME}"	    
+    },
+    "fence device": {
+        "xml_element":"resources/resource/[@resource_agent='stonith:fence_brocade']",
+	"xml_attr_name": "id",
+        "xml_attributes":
+            [
+             "role",
+             "active",
+             "orphaned",
+             "blocked",
+             "managed",
+             "failed",
+             "failure_ignored",
+             "nodes_running_on"
+            ],
+	"zabbix_discovery_name":"fence.devices.discovery",
+        "zabbix_discovery_macro": "{#FD_NAME}"
+    },
+    "virtual domain": {
+        "xml_element":"resources/resource/[@resource_agent='ocf::heartbeat:VirtualDomain']",
+        "xml_attr_name": "id",
+        "xml_attributes":
+            [
+             "role",
+             "active",
+             "orphaned",
+             "blocked",
+             "managed",
+             "failed",
+             "failure_ignored",
+             "nodes_running_on"
+            ],
+        "zabbix_discovery_name":"resources.discovery",
+        "zabbix_discovery_macro": "{#RESOURCE_NAME}"
+    },
+    "DLM": {
+        "xml_element":"resources/resource/[@resource_agent='ocf::pacemaker:controld']",
+        "xml_attr_name": "id",
+        "xml_attributes":
+            [
+             "role",
+             "active",
+             "orphaned",
+             "blocked",
+             "managed",
+             "failed",
+             "failure_ignored",
+             "nodes_running_on"
+            ],
+        "zabbix_discovery_name":"resources.discovery",
+        "zabbix_discovery_macro": "{#RESOURCE_NAME}"
+    },
+    "LVM lockd": {
+        "xml_element":"resources/resource/[@resource_agent='ocf::heartbeat:lvmlockd']",
+        "xml_attr_name": "id",
+        "xml_attributes":
+            [
+             "role",
+             "active",
+             "orphaned",
+             "blocked",
+             "managed",
+             "failed",
+             "failure_ignored",
+             "nodes_running_on"
+            ],
+        "zabbix_discovery_name":"resources.discovery",
+        "zabbix_discovery_macro": "{#RESOURCE_NAME}"
+    },
+    "LVM": {
+        "xml_element":"resources/resource/[@resource_agent='ocf::heartbeat:LVM-activate']",
+        "xml_attr_name": "id",
+        "xml_attributes":
+            [
+             "role",
+             "active",
+             "orphaned",
+             "blocked",
+             "managed",
+             "failed",
+             "failure_ignored",
+             "nodes_running_on"
+            ],
+	"zabbix_discovery_name":"resources.discovery",
+        "zabbix_discovery_macro": "{#RESOURCE_NAME}"
+    },
+    "filesystem": {
+        "xml_element":"resources/resource/[@resource_agent='ocf::heartbeat:Filesystem']",
+        "xml_attr_name": "id",
+        "xml_attributes":
+            [
+             "role",
+             "active",
+             "orphaned",
+             "blocked",
+             "managed",
+             "failed",
+             "failure_ignored",
+             "nodes_running_on"
+            ],
+        "zabbix_discovery_name":"resources.discovery",
+        "zabbix_discovery_macro": "{#RESOURCE_NAME}"
+    },
+    "clone": {
+        "xml_element":"resources/clone",
+        "xml_attr_name": "id",
+        "xml_attributes":
+            [
+             "multi_state",
+             "unique",
+             "managed",
+             "failed",
+             "failure_ignored"
+            ],
+        "zabbix_discovery_name":"clones.discovery",
+        "zabbix_discovery_macro": "{#CLONE_NAME}"
+    }
+
+}
