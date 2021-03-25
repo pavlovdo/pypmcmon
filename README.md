@@ -22,8 +22,8 @@ Installation
 1) Clone pypmcmon repo to directory /etc/zabbix/externalscripts to each node of cluster (where you want to get status via pcs):
 ```
 sudo mkdir -p /etc/zabbix/externalscripts
-cd /etc/zabbix/externalscripts
-sudo git clone https://github.com/pavlovdo/pypmcmon
+sudo git clone https://github.com/pavlovdo/pypmcmon /etc/zabbix/externalscripts/pypmcmon
+cd /etc/zabbix/externalscripts/pypmcmon
 ```
 
 2) A) Check execute permissions for scripts:
@@ -37,17 +37,12 @@ sudo chmod +x *.py *.sh
 
 3) Change example configuration file pyipmimon.conf: login, password, address of zabbix_server;
 
-4) A) Check run pcs status:
+4) Check run pcs status:
 ```
 /sbin/pcs status
 ```
 You have to view status of your cluster. If not, check pcs installation and permissions to run pcs from this node.
 
-B) Create cron job to run pcs status:
-```
-echo "*/1 * * * * /sbin/pcs status xml > /etc/zabbix/externalscripts/pypmcmon/data/pmc_status.xml" >> /tmp/crontab && \
-crontab /tmp/crontab && rm /tmp/crontab
-```
 
 5) Check configuration and running zabbix trappers on your zabbix server or proxy:
 ```
@@ -89,9 +84,9 @@ B) Install required python modules:
 pip3 install -r requirements.txt
 ```
 
-C) Create cron jobs for zabbix trappers:
+C) Create cron job to get pcs status and send data to zabbix:
 ```
-echo "*/1 * * * * /etc/zabbix/externalscripts/pypmcmon/pypmcmon.py" > /tmp/crontab && \
+echo "*/1 * * * * /sbin/pcs status xml > /etc/zabbix/externalscripts/pypmcmon/data/pmc_status.xml && /etc/zabbix/externalscripts/pypymcmon/pypmcmon.py > /dev/null" >> /tmp/crontab && \
 crontab /tmp/crontab && rm /tmp/crontab
 ```
 
